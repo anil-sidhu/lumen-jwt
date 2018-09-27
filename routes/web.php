@@ -11,20 +11,17 @@
 |
 */
 
-$router->get('/', function () use ($router) {
+// $router->get('/', function () use ($router) {
+//     return $router->app->version();
+// });
 
-    return $router->app->version();
-});
- 
-// $router->get('/','ExampleController@show');
-$router->post('/', 'ExampleController@postLogin'); 
+$router->get('/', ['middleware' => 'auth', function () {
+}]); 
+
+
+$router->post('/', 'ExampleController@auth'); 
 $router->post('/save', 'ExampleController@save'); 
-// $router->post('/test', 'ExampleController@test'); 
+$router->post('/logout', 'ExampleController@logout'); 
+$router->get('/test', 'ExampleController@test',['middleware' => 'auth', function () {
+}]); 
 
-$router->get('/test', ['middleware' => 'auth', function () {
-    //
-    echo "here";
-}]);
-
-
- 

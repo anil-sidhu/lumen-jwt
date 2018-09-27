@@ -62,11 +62,10 @@ $app->singleton(
 $app->middleware([
   // App\Http\Middleware\Authenticate::class,
 ]);
-
+ 
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,     
 ]); 
-
 /*
 |--------------------------------------------------------------------------
 | Register Service Providers
@@ -98,5 +97,7 @@ $app->router->group([
 ], function ($router) {
     require __DIR__.'/../routes/web.php';
 });
+
+$app->configure('apiConstants');
 
 return $app;
