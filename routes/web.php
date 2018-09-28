@@ -11,17 +11,13 @@
 |
 */
 
-// $router->get('/', function () use ($router) {
-//     return $router->app->version();
-// });
-
 $router->get('/', ['middleware' => 'auth', function () {
 }]); 
 
-
 $router->post('/', 'ExampleController@auth'); 
 $router->post('/save', 'ExampleController@save'); 
-$router->post('/logout', 'ExampleController@logout'); 
-$router->get('/test', 'ExampleController@test',['middleware' => 'auth', function () {
-}]); 
 
+$router->group(['middleware' => 'auth'], function ($router) {
+    $router->get('/logout', 'ExampleController@logout');
+    $router->get('/test', 'ExampleController@test'); 
+});

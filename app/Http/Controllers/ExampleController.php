@@ -17,12 +17,11 @@ class ExampleController extends Controller
     public function __construct(JWTAuth $jwt)
     {
         $this->jwt = $jwt;
-        $this->const = config('apiConstants');
+        $this->const = config('apiConstants.login');
     }
 
     public function auth(Request $request)
     {
-
         $this->validate($request, [
             'email' => 'required|max:255',
             'password' => 'required',
@@ -60,15 +59,28 @@ class ExampleController extends Controller
     }
     public function test()
     {
-         return "test Done";
-        
+        $Response = Helper::result(
+            true,
+            $this->const['infoCode'],
+            "Test Api Done"
+        );
+        return response()->json($Response);
+
     }
-    public function logout()
+
+    public function logout(Request $request)
     {
-        print_r($this->const['infoMsg']);
+
         //$this->jwt->setToken("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwOCIsImlhdCI6MTUzODAzOTE1NiwiZXhwIjoxNTM4MDM5Mjc2LCJuYmYiOjE1MzgwMzkxNTYsImp0aSI6IlRUOHE4bGpaeE8wQVZMdmciLCJzdWIiOjYsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.eKnP2MjlZk4uqh0Jq_7-gXFQXK9G-77bDqpB33Oi6DI")->invalidate();
         //  print_r(config('apiConstants.login'));
 
-        return "logout Done";
+        $Response = Helper::result(
+            true,
+            $this->const['infoCode'],
+            "Test Api Done"
+        );
+        print_r($request->myAttribute);
+        return response()->json($Response);
+
     }
 }
