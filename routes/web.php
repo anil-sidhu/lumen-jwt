@@ -18,6 +18,7 @@ $router->post('/', 'ExampleController@auth');
 $router->post('/save', 'ExampleController@save'); 
 
 $router->group(['middleware' => 'auth'], function ($router) {
+   
     $router->get('/logout', 'ExampleController@logout');
     $router->get('/test', 'ExampleController@test'); 
 });

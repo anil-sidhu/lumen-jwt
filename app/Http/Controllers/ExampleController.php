@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\ApiHelpers\ResponseBuilder;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -17,9 +18,8 @@ class ExampleController extends Controller
     public function __construct(JWTAuth $jwt)
     {
         $this->jwt = $jwt;
-        $this->const = config('apiConstants.login');
+        $this->const = trans('apiResponse.login');
     }
-
     public function auth(Request $request)
     {
         $this->validate($request, [
@@ -43,7 +43,7 @@ class ExampleController extends Controller
             return response()->json(['token_absent' => $e->getMessage()], 500);
 
         }
-        $Response = Helper::result(
+        $Response = ResponseBuilder::result(
             true,
             $this->const['infoCode'],
             $this->const['infoMsg']
@@ -59,7 +59,7 @@ class ExampleController extends Controller
     }
     public function test()
     {
-        $Response = Helper::result(
+        $Response = ResponseBuilder::result(
             true,
             $this->const['infoCode'],
             "Test Api Done"
@@ -67,20 +67,16 @@ class ExampleController extends Controller
         return response()->json($Response);
 
     }
-
     public function logout(Request $request)
     {
+        app('translator')->setLocale("en");
 
-        //$this->jwt->setToken("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwOCIsImlhdCI6MTUzODAzOTE1NiwiZXhwIjoxNTM4MDM5Mjc2LCJuYmYiOjE1MzgwMzkxNTYsImp0aSI6IlRUOHE4bGpaeE8wQVZMdmciLCJzdWIiOjYsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.eKnP2MjlZk4uqh0Jq_7-gXFQXK9G-77bDqpB33Oi6DI")->invalidate();
-        //  print_r(config('apiConstants.login'));
-
-        $Response = Helper::result(
+        // $this->jwt->setToken("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwOCIsImlhdCI6MTUzODAzOTE1NiwiZXhwIjoxNTM4MDM5Mjc2LCJuYmYiOjE1MzgwMzkxNTYsImp0aSI6IlRUOHE4bGpaeE8wQVZMdmciLCJzdWIiOjYsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.eKnP2MjlZk4uqh0Jq_7-gXFQXK9G-77bDqpB33Oi6DI")->invalidate();
+        $Response = ResponseBuilder::result(
             true,
             $this->const['infoCode'],
             "Test Api Done"
         );
-        print_r($request->myAttribute);
         return response()->json($Response);
-
     }
 }

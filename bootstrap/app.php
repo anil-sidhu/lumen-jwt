@@ -78,6 +78,10 @@ $app->routeMiddleware([
 */
 
  $app->register(App\Providers\AppServiceProvider::class);
+
+ 
+
+ 
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 
@@ -98,6 +102,8 @@ $app->router->group([
     require __DIR__.'/../routes/web.php';
 });
 
-$app->configure('apiConstants');
+$app->configure('ApiStrings');
 
+
+app('translator')->setLocale('hi');
 return $app;
