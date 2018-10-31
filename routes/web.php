@@ -12,19 +12,20 @@
 */
 
 $router->get('/', function () use ($router) {
-
+ 
     return $router->app->version();
 });
  
 // $router->get('/','ExampleController@show');
 $router->post('/', 'ExampleController@postLogin'); 
 $router->post('/save', 'ExampleController@save'); 
-// $router->post('/test', 'ExampleController@test'); 
+ $router->get('/test', 'ExampleController@test'); 
 
-$router->get('/test', ['middleware' => 'auth', function () {
-    //
-    echo "here";
-}]);
+// $router->get('/test', ['middleware' => 'auth', function ($router) {
+//  $router->get('/test', 'ExampleController@test'); 
 
+//     // echo "here";
+// }]); 
+ 
 
  

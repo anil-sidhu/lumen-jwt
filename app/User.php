@@ -22,6 +22,7 @@ class User extends Model implements JWTSubject, AuthenticatableContract, Authori
     protected $fillable = [
         'name', 'email',
     ];
+    public $incrementing = false;
 
     /**
      * The attributes excluded from the model's JSON form.
